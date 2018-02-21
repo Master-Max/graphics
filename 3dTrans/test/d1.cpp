@@ -1,24 +1,33 @@
 #include <GL/glut.h>
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
 void displayMe(void)
 {
+    glm::vec4 a = glm::vec4(0.0, 0.0, 0.0, 1.0);
+    glm::vec4 b = glm::vec4(0.5, 0.0, 0.0, 1.0);
+    glm::vec4 c = glm::vec4(0.5, 0.5, 0.0, 1.0);
+
+    //glVertex4f(GLfloat x, GLfloat y, GLfloat z, GLfloat w)
+
     glClear(GL_COLOR_BUFFER_BIT);
     glBegin(GL_POLYGON);
-        glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.5, 0.0, 0.0);
-        glVertex3f(0.5, 0.5, 0.0);
+        glVertex4f(glm::value_ptr(a));
+        glVertex4f(glm::value_ptr(b));
+        glVertex4f(glm::value_ptr(c));
         //glVertex3f(0.0, 0.5, 0.0);
     glEnd();
     glFlush();
 }
 
-void drawLine(float x1, float y1, float z1,
-float x2, float y2, float z2)
+void drawLine(void)
 {
+  glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_LINES);
-		glVertex3f(x1, y1, z1);
-		glVertex3f(x2, y2, z2);
+		glVertex3f(-10.0, 0.0, 0.0);
+		glVertex3f(5.0, 50.0, 0.0);
 	glEnd();
+  glLineWidth(2.5f);
 	glFlush();
 }
 
@@ -32,8 +41,7 @@ int main(int argc, char** argv)
     glutInitWindowPosition(100, 100);
     glutCreateWindow("Hello world :D");
     glutDisplayFunc(displayMe);
-		glutDisplayFunc(drawLine(0.0, 0.0, 0.0,
-			0.5, 0.5, 0.0));
+		//glutDisplayFunc(drawLine);
     glutMainLoop();
     return 0;
 }
